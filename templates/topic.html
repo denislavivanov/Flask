@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href="/static/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu%20Mono">
+	<title>{{ topic }}</title>
+</head>
+<body>
+	<div class="container-home">
+		<div><p id="h1">{{ topic }}</p></div>
+		<div><a href="home">Home</a></div>
+		<div><a href="about">About</a></div>
+		{% if loggedin: %}
+			<div><p id="h1">{{ username }}</p></div>
+			<form method="POST">
+				<div><input id="log-out" name="logout" type="submit" Value="Logout"></div>
+			</form>
+		{% else: %}
+			<div><a href="login">Login</a></div>
+			<div><a id="register-button" href="register">Register</a></div>
+		{% endif %}
+	</div>
+
+	{% if loggedin: %}
+		<form method="POST">
+			<div class="post-box">
+				<div><input type="text" name="title" id="write-post-title" placeholder="Title..." required></div><br>
+				<div><textarea name="post" id="write-post" placeholder="Write..." required></textarea></div><br>
+				<div><input type="submit" id="submit-post" Value="POST"></div>
+			</div>
+		</form>
+	{% else: %}
+		<div class="post-box">
+			<div class="msg">
+				Sign in to post.
+			</div>
+		</div>
+	{% endif %}
+
+	{% if loggedin and delete: %}
+	<div class="delete">
+		<div class="topic-titles"><p style="margin-top: 0px; margin-left: 20px;">Delete Posts: </p></div>
+		{% for post in user_posts: %}
+		<form method="POST">
+			<div><input type="submit" name="delete" id="delete-post-title" value="{{ post.title }}"></div>
+		</form>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+		<div class="post-field">
+	{% for post in posts: %}
+		<div class="post">
+			<div class="avatar">
+				<img id="avatar" width="60" height="57" g src="static/silhouette.jpg">
+			</div>
+			<div class="grid2">
+				<div class="title">
+					<h2>{{ post.title }}</h2>
+				</div>
+				<div class="date">
+					<p>by {{ post.author }} {{ post.date }}</p><hr>
+				</div>
+				<div class="text">
+					{{ post.content }}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+
+	<div class="container-bottom">
+		<div><p style="padding-left: 40px;">© All rights reserved 2021</p></div>
+	</div>
+</body>
+</html>

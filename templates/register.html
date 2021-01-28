@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href="/static/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu%20Mono">
+	<title>Register</title>
+</head>
+<body>
+	<div class="login-container">
+		<div><a id="login-home" href="home">Home</a></div>
+		<div><a href="about">About</a></div>
+		<div><a href="login">Login</a></div>
+	</div>
+
+	<div class="login-bar">
+		<h1>Sign Up:</h1>
+		{% if error == 1: %}
+			<div class="error">
+				Passwords do not match. Try again
+			</div>
+		{% elif error == 0: %}
+			<div class="success">
+				<div>Registration was successful.</div>
+				<div><a id="sign-in" href="login">Sign In</a></div>
+			</div>
+		{% endif %}
+		<div class="input">
+			<form method="POST">
+				<input type="text" name="user" placeholder="Username" required>
+				<div class="password"><input type="password" name="pass" placeholder="Password" required></div>
+				<div class="password"><input type="password" name="c_pass" placeholder="Confirm Password" required></div>
+				<p class="need-account">Already Have An Account? <a id='sign-up' href="login">Sign In</a></p>
+				<input id="submit" type="submit" Value="Register">
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

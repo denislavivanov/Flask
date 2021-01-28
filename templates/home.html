@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href="/static/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu%20Mono">
+	<title>Home Page</title>
+</head>
+<body>
+	<div class="container-home">
+		<div><p id="h1">Flask Forum</p></div>
+		<div><a href="home">Home</a></div>
+		<div><a href="about">About</a></div>
+		{% if loggedin: %}
+			<div><p id="h1">{{ username }}</p></div>
+			<form method="POST">
+				<div><input id="log-out" name="logout" type="submit" Value="Logout"></div>
+			</form>
+		{% else: %}
+			<div><a href="login">Login</a></div>
+			<div><a id="register-button" href="register">Register</a></div>
+		{% endif %}
+	</div>
+
+	{% if loggedin: %}
+		<div class="topic-box">
+			<div class="topic-title">
+				<form method="POST">
+				<input type="text" name="title" id="write-post-title" placeholder="Title..." required>
+			</div>
+			
+			<div>
+				<input type="submit" id="topic-submit" Value="Create Topic">
+				</form>
+			</div>
+		</div>
+			
+	{% else: %}
+		<div class="post-box">
+			<div class="msg">
+				Sign in to be able to post.
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="topics">
+		<div class="topic-titles"><p style="margin-top: 0px; margin-left: 20px;">Topics: </p></div>
+		{% for topic in topics: %}
+		<div class="topic">
+			<form method="POST">
+			<div><input type="submit" name="topic-title" id="topic-title" value="{{ topic.title }}"></div>
+			</form>
+			<div><p id="topic-info">by {{ topic.author }} {{ topic.date }}</p></div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="container-bottom">
+		<div><p style="padding-left: 40px;">© All rights reserved 2021</p></div>
+	</div>
+</body>
+</html>

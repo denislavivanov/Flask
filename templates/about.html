@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href="/static/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu%20Mono">
+	<title>About</title>
+</head>
+<body>
+	<div class="about-container">
+		<div><a id="login-home" href="home">Home</a></div>
+		{% if loggedin: %}
+			<div><p id="h1">{{ username }}</p></div>
+			<form method="POST">
+				<div><input id="log-out" name="logout" type="submit" Value="Logout"></div>
+			</form>
+		{% else: %}
+			<div><a href="login">Login</a></div>
+			<div><a id="register-button" href="register">Register</a></div>
+		{% endif %}
+	</div>
+
+	<div class="about">
+		<div>© Simple Forum Made With Flask</div>
+	</div>
+</body>
+</html>
